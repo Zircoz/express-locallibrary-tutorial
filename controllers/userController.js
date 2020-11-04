@@ -38,7 +38,7 @@ exports.register_POST = [
             user.save(function(err) {
               if (err) { return next(err); }
                 res.cookie("userData", {name: user.name, email: user.email, id: user._id, authenticated: true}, {maxAge: 360000});
-                res.send(user);
+                res.redirect('/');
             });
           }
         }
@@ -65,7 +65,7 @@ exports.login_POST = [
           if(!!docs){
             if(bcrypt.compareSync(req.body.password, docs.password)) {
               res.cookie("userData", {name: docs.name, email: docs.email, id: docs._id, authenticated: true}, {maxAge: 360000});
-              res.send(docs);
+              res.redirect('/');
             }
             else {
               res.render('/user');
