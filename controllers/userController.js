@@ -68,7 +68,7 @@ exports.login_POST = [
               res.redirect('/');
             }
             else {
-              res.render('/user');
+              res.redirect('/user');
             }
           }
         }
