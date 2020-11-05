@@ -6,10 +6,16 @@ const { body,validationResult } = require("express-validator")
 exports.register_POST = [
 
   //validate and sanitize fields
-  body('username').trim().isLength({min: 1}).escape().withMessage('Username must be specified')
-    .isAlphanumeric().withMessage('Username has non-alphanumeric characters.'),
-  body('email').trim().isLength({min: 3}).escape().withMessage('Email must be specified'),
-  body('password').trim().isLength({min: 8}).escape().withMessage("Password must be of 8+ length"),
+  body('username').trim().isLength({min: 1}).escape().withMessage('Username must be specified').
+    isAlphanumeric().withMessage('Username has special characters.'),
+  body('email').trim().isLength({min: 4}).escape().withMessage('Email must be specified').custom(value => {
+    return User.findOne({email: value}).then(user => {
+      if (user) {
+        return Promise.reject("Email already in use");
+      }
+    });
+  }),
+  body('password').trim().isLength({min: 8}).escape().withMessage("Password must be of 8+ alphanumeric length"),
 
   (req, res, next) => {
     const errors = validationResult(req);
@@ -23,38 +29,34 @@ exports.register_POST = [
     );
     //console.log(errors.throw());
     if (!errors.isEmpty()) {
-      res.send(errors);
+      res.render('user', {userRegister: user, errorsRegister: errors.array() });
     }
     else {
-      User.countDocuments({ email: req.body.email}, function(err, doc){
-        if (err) {
-          res.send("sanitize err");
-        }
-        else {
-          if(doc) {
-            res.redirect('/user');
-          }
-          else {
-            user.save(function(err) {
-              if (err) { return next(err); }
-                res.cookie("userData", {name: user.name, email: user.email, id: user._id, authenticated: true}, {maxAge: 360000});
-                res.redirect('/');
-            });
-          }
-        }
+      user.save(function(err) {
+        if (err) { return next(err); }
+          res.cookie("userData", {name: user.name, email: user.email, id: user._id, authenticated: true}, {maxAge: 360000});
+          res.redirect('/');
       });
     }
   }
 ];
 
+
+
 exports.login_POST = [
-  body('email').trim().isLength({min: 3}).escape().withMessage('Email must be specified'),
+  body('email').trim().isLength({min: 3}).escape().withMessage('Email must be specified').custom(value => {
+    return User.findOne({email: value}).then(user => {
+      if (!user) {
+        return Promise.reject("Email not registered");
+      }
+    });
+  }),
   body('password').trim().isLength({min: 8}).escape().withMessage("Password must be of 8+ length"),
 
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.send("sanitize error")
+      res.render("user", {userLogin: {email: req.body.email}, errorsLogin: errors.array() })
     }
     else {
       User.findOne({email: req.body.email}, function(err, docs){
@@ -67,15 +69,23 @@ exports.login_POST = [
               res.cookie("userData", {name: docs.name, email: docs.email, id: docs._id, authenticated: true}, {maxAge: 360000});
               res.redirect('/');
             }
-            else {
-              res.redirect('/user');
-            }
           }
         }
       });
     }
   }
 ];
+
+exports.isAuthenticated = function(req, res, next) {
+  if (req.cookies.userData==undefined) {
+    res.redirect('/user');
+  }
+  if (req.cookies.userData.authenticated==true){
+    return next()
+  }
+  res.redirect('/user');
+}
+
 
 exports.logout_GET = function (req, res, next) {
     res.clearCookie("userData");

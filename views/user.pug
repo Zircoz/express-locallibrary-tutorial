@@ -2,28 +2,34 @@ doctype html
 head
   title Login/Register
   link(rel='stylesheet' href='/stylesheets/user.css')
-form#register(method='post' action='/register')
-  h3 If you are new, register here:
-  label(for='username') Username
-  input(name='username' type='text' required='true' placeholder='Enter Username')
-  br
-  label(for='email') Email
-  input(type='email' required='true' name='email' placeholder='Enter email')
-  br
-  label(for='password') Password
-  input(type='password' name='password' required='true' placeholder='Enter password')
-  br
-  button(type='submit') Register
-form#login(method='post' action='/login')
-  h3 If you are already registered, login here:
-  label(for='email') Email
-  input(type='email' name='email' placeholder='Enter email' required='true')
-  br
-  label(for='password') Password
-  input(type='password' name='password' placeholder='Enter password' required='true')
-  br
-  button(type='submit') Login
-if errors
-  ul
-    for error in errors
-      li!= error.msg
+body
+  form#register(method='post' action='/register')
+    h3 If you are new, register here:
+    label(for='username') Username
+    input(name='username' type='text' required='true' placeholder='Enter Username' value=(undefined===userRegister ? '' : userRegister.name))
+    br
+    label(for='email') Email
+    input(type='email' required='true' name='email' placeholder='Enter email' value=(undefined===userRegister ? '':userRegister.email) )
+    br
+    label(for='password') Password
+    input(type='password' name='password' required='true' placeholder='Enter password')
+    br
+    button(type='submit') Register
+    if errorsRegister
+      ul
+        for error in errorsRegister
+          li!= error.msg
+
+  form#login(method='post' action='/login')
+    h3 If you are already registered, login here:
+    label(for='email') Email
+    input(type='email' name='email' placeholder='Enter email' required='true' value=(undefined===userLogin ? '':userLogin.email))
+    br
+    label(for='password') Password
+    input(type='password' name='password' placeholder='Enter password' required='true' )
+    br
+    button(type='submit') Login
+    if errorsLogin
+      ul
+        for error in errorsLogin
+          li!= error.msg
