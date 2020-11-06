@@ -76,6 +76,10 @@ exports.login_POST = [
   }
 ];
 
+exports.profile_GET = function(req, res, next) {
+  res.render('profile', {title: "My Profile", user: req.cookies.userData});
+}
+
 exports.isAuthenticated = function(req, res, next) {
   if (req.cookies.userData==undefined) {
     res.redirect('/user');
