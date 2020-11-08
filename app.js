@@ -43,10 +43,10 @@ app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
 
 app.get('/.well-known/acme-challenge/16vPNyAKl8C93X0MS8Fg-PlpXXpxdpjFgrh0h1-3B9k', function(req, res){
-  res.send('16vPNyAKl8C93X0MS8Fg-PlpXXpxdpjFgrh0h1-3B9k');
+  res.send('./16vPNyAKl8C93X0MS8Fg-PlpXXpxdpjFgrh0h1-3B9k');
 });
 app.get('/.well-known/acme-challenge/fQlTpKdIqO6g2kjNQ5DonXJ5yX35ZWIPLrlxT2oVnDU', function(req, res){
-  res.send('fQlTpKdIqO6g2kjNQ5DonXJ5yX35ZWIPLrlxT2oVnDU');
+  res.send('./fQlTpKdIqO6g2kjNQ5DonXJ5yX35ZWIPLrlxT2oVnDU');
 });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
