@@ -3,9 +3,22 @@ extends layout
 block content
 
   h1 My Profile
+  script(src="https://unpkg.com/@simplewebauthn/browser@0.10.0/dist/simplewebauthn-browser.min.js" defer)
+  script(src="/javascripts/simplewebauthAttestation.js" defer)
   hr
   h2 Username: #{user.name}
   h2 Email: #{user.email}
+  div(style='margin-left: 20px; margin-top: 20px')
+    h4 Passwordless Entry Attestation
+    p Register your device to login into your account with just your physical key (for example your fingerprint).
+    p Only works if you have the fingerprint lock on your device as we don't store your prints
+
+    hr
+
+    button#btnBegin Attest/Register
+    span#success
+    span#error
+
 //-
   div(style='margin-left:20px;margin-top:20px')
 

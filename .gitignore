@@ -5,6 +5,11 @@ npm-debug.log*
 *.bak
 .env
 
+#ssl keys and cert
+*.crt
+*.key
+*pem
+
 # Runtime data
 pids
 *.pid

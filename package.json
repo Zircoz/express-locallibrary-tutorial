@@ -11,6 +11,8 @@
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
   },
   "dependencies": {
+    "@simplewebauthn/browser": "^0.10.0",
+    "@simplewebauthn/server": "^0.10.3",
     "async": "^3.2.0",
     "bcrypt": "^5.0.0",
     "compression": "^1.7.4",

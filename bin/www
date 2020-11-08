@@ -6,21 +6,36 @@
 
 var app = require('../app');
 var debug = require('debug')('express-locallibrary-tutorial:server');
+// http for heroku
 var http = require('http');
-
+var fs = require('fs');
+//https for localhost
+//var https = require('https');
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTP server for heroku.
  */
 
 var server = http.createServer(app);
 
+//HTTPS for localhost
+/*
+var server = https.createServer(
+  {
+    key: fs.readFileSync('/home/zircoz/Documents/github/library/express-locallibrary-tutorial/localhost.key'),
+    cert: fs.readFileSync('/home/zircoz/Documents/github/library/express-locallibrary-tutorial/localhost.crt'),
+    requestCert: false,
+    rejectUnauthorized: false,
+  },
+  app
+);
+*/
 /**
  * Listen on provided port, on all network interfaces.
  */
