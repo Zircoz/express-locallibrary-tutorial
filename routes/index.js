@@ -16,6 +16,7 @@ router.get('/logout', userController.logout_GET);
 router.get('/profile', userController.isAuthenticated, userController.profile_GET);
 router.get('/generate-attestation-options', userController.isAuthenticated, webauthnController.generateAttestationOptions_GET);
 router.post('/verify-attestation', userController.isAuthenticated, webauthnController.verifyAttestation_POST);
-
+router.post('/generate-assertion-options', webauthnController.generateAssertionOptions_POST);
+router.post('/verify-assertion', webauthnController.verifyAssertion_POST);
 
 module.exports = router;

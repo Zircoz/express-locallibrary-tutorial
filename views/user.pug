@@ -2,6 +2,9 @@ doctype html
 head
   title Login/Register
   link(rel='stylesheet' href='/stylesheets/user.css')
+  script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
+  script(src="https://unpkg.com/@simplewebauthn/browser@0.10.0/dist/simplewebauthn-browser.min.js" defer)
+  script(src="/javascripts/simplewebauthAssertion.js" defer)
 body
   form#register(method='post' action='/register')
     h3 If you are new, register here:
@@ -33,3 +36,10 @@ body
       ul
         for error in errorsLogin
           li!= error.msg
+  div#webauthnAssert
+    h3 Login with biometric
+    label(for="email") Email
+    input#emailAssert(type="email" name="email" placeholder="Enter Email" required="true")
+    button#btnBegin(type="submit") Assert/Login
+    span#success
+    span#error

@@ -90,7 +90,6 @@ exports.isAuthenticated = function(req, res, next) {
   res.redirect('/user');
 }
 
-
 exports.logout_GET = function (req, res, next) {
     res.clearCookie("userData");
     res.redirect('/user');
