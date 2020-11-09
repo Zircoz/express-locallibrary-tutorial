@@ -1,3 +1,11 @@
+# IMPORTANT NOTE BEGINS
+
+This fork is under development and readme + contribution guidelines are obsolete. We'll update them and write detailed docs for running the feature-rich branches on your system since they may differ from original repo's and need additional packages & setup (mostly software) for newbies. Please let us know in issues before starting to work on any of the branches in this fork to prevent duplication and unnecessary conflicts. You can check our project for measuring the progress. However, it only measures the issues we hav started or are about to start working on. There might be more planned developments not listed in project or issues.
+
+# IMPORTANT NOTE ENDS
+
+
+
 # express-locallibrary-tutorial
 Tutorial "Local Library" website written in in Node/Express.
 
