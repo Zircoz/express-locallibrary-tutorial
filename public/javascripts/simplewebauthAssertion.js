@@ -40,6 +40,7 @@ elemBegin.addEventListener('click', async () => {
 
   const verificationResp = await fetch('/verify-assertion', {
     method: 'POST',
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
     },
