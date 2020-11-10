@@ -92,12 +92,7 @@ exports.verifyAttestation_POST = async function(req, res, next) {
 };
 
 exports.generateAssertionOptions_POST = async function(req, res, next) {
-  console.log(req.body);
-  var webnauthuser = new User(
-    {
-      email: req.body.email
-    }
-  );
+  //console.log(req.body);
 
   const assertingUser = await User.findOne({email: req.body.email});
   if(!assertingUser) {
@@ -120,7 +115,7 @@ exports.generateAssertionOptions_POST = async function(req, res, next) {
       if (err){
         console.log(err);
       } else {
-        res.cookie("loggingInUserData", {email: webnauthuser.email}, {maxAge: 150000});
+        res.cookie("loggingInUserData", {email: assertingUser.email}, {maxAge: 150000});
         res.send(options);
       }
     }

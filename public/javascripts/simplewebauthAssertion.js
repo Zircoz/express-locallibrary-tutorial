@@ -21,6 +21,7 @@ elemBegin.addEventListener('click', async () => {
 
   const resp = await fetch('/generate-assertion-options', {
     method: 'POST',
+    credentials: 'include',
     body: formData
   });
   if(resp==='') {
