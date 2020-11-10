@@ -152,7 +152,7 @@ exports.verifyAssertion_POST = async function(req, res, next) {
         } else {
           res.clearCookie("loggingInUserData");
           res.cookie("userData", {name: assertingUser.name, email: assertingUser.email, id: assertingUser._id, authenticated: true}, {maxAge: 360000});
-          res.send(verified);
+          res.send({verified});
         }
       }
     );
