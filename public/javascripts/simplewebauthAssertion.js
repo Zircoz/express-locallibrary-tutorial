@@ -55,6 +55,6 @@ elemBegin.addEventListener('click', async () => {
             window.location.href = '/';
           }, 3000);
     } else {
-      elemError.innerHTML = 'Oh no, something went wrong! Response:' + JSON.stringify(verificationJSON);
+      elemError.innerHTML = 'Oh no, something went wrong! Response:' + JSON.stringify(verificationJSON) + JSON.stringify(verificationJSON.verified);
     }
 });
