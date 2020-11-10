@@ -72,7 +72,7 @@ exports.verifyAttestation_POST = async function(req, res, next) {
     const { base64PublicKey, base64CredentialID, counter } = authenticatorInfo;
     var newAuthenticator = new Authenticator(
       {
-        credentialID: base64PublicKey,
+        credentialID: base64CredentialID,
         publicKey: base64PublicKey,
         counter: counter,
         user_id: user._id
