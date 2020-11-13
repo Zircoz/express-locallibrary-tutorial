@@ -1,7 +1,13 @@
-form{
+body{
+  font-family:"Roboto";
+  margin:0;
+  padding: 10%;
+  text-align: center;
+}
+/*form{
   margin: 10px;
   margin-right: 30%;
-}
+}*/
 label{
   margin-top: 2px;
 }
@@ -10,4 +16,11 @@ input{
 }
 button {
   margin: 5px;
+}
+h3{
+
+}
+.card{
+  margin: 1%;
+  padding:3%;
 }
