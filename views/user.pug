@@ -5,41 +5,67 @@ head
   script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
   script(src="https://unpkg.com/@simplewebauthn/browser@0.10.0/dist/simplewebauthn-browser.min.js" defer)
   script(src="/javascripts/simplewebauthAssertion.js" defer)
+  link(rel="preconnect" href="https://fonts.gstatic.com")
+  link(href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet")
+  link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous")
+  link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous")
 body
-  form#register(method='post' action='/register')
-    h3 If you are new, register here:
-    label(for='username') Username
-    input(name='username' type='text' required='true' placeholder='Enter Username' value=(undefined===userRegister ? '' : userRegister.name))
-    br
-    label(for='email') Email
-    input(type='email' required='true' name='email' placeholder='Enter email' value=(undefined===userRegister ? '':userRegister.email) )
-    br
-    label(for='password') Password
-    input(type='password' name='password' required='true' placeholder='Enter password')
-    br
-    button(type='submit') Register
-    if errorsRegister
-      ul
-        for error in errorsRegister
-          li!= error.msg
-
-  form#login(method='post' action='/login')
-    h3 If you are already registered, login here:
-    label(for='email') Email
-    input(type='email' name='email' placeholder='Enter email' required='true' value=(undefined===userLogin ? '':userLogin.email))
-    br
-    label(for='password') Password
-    input(type='password' name='password' placeholder='Enter password' required='true' )
-    br
-    button(type='submit') Login
-    if errorsLogin
-      ul
-        for error in errorsLogin
-          li!= error.msg
-  div#webauthnAssert
-    h3 Login with biometric
-    label(for="email") Email
-    input#emailAssert(type="email" name="email" placeholder="Enter Email" required="true")
-    button#btnBegin(type="submit") Assert/Login
-    span#success
-    span#error
+  div(class="row")
+    div(class="col-md-6")
+      div(class="card")
+        form#register(method='post' action='/register')
+          h3 If you are new, register here:
+          label(for='username') Username
+          div(class="input-group-prepend")
+            span(class="input-group-text")
+              i(class="fas fa-user")
+            input(name='username' type='text' required='true' placeholder='Enter Username' value=(undefined===userRegister ? '' : userRegister.name) class="form-control")
+          br
+          label(for='email') Email
+          div(class="input-group-prepend")
+            span(class="input-group-text")
+              i(class="fas fa-envelope")
+            input(type='email' required='true' name='email' placeholder='Enter email' value=(undefined===userRegister ? '':userRegister.email) class="form-control")
+          br
+          label(for='password') Password
+          div(class="input-group-prepend")
+            span(class="input-group-text")
+              i(class="fas fa-key")
+          input(type='password' name='password' required='true' placeholder='Enter password' class="form-control")
+          br
+          button(type='submit' class="btn btn-primary btn-lg btn-block") Register
+          if errorsRegister
+            ul
+              for error in errorsRegister
+                li!= error.msg
+    div(class="col-md-6")
+      div(class="card")
+        form#login(method='post' action='/login')
+          h3 If you are already registered, login here:
+          label(for='email') Email
+          div(class="input-group-prepend")
+            span(class="input-group-text")
+              i(class="fas fa-envelope")
+            input(type='email' name='email' placeholder='Enter email' required='true' value=(undefined===userLogin ? '':userLogin.email) class="form-control")
+          br
+          label(for='password') Password
+          div(class="input-group-prepend")
+            span(class="input-group-text")
+              i(class="fas fa-key")
+            input(type='password' name='password' placeholder='Enter password' required='true' class="form-control")
+          br
+          button(type='submit' class="btn btn-primary btn-lg btn-block") Login
+          if errorsLogin
+            ul
+              for error in errorsLogin
+                li!= error.msg
+      div#webauthnAssert(class="card")
+        h3 Login with biometric
+        label(for="email") Email
+        div(class="input-group-prepend")
+          span(class="input-group-text")
+            i(class="fas fa-envelope")
+          input#emailAssert(type="email" name="email" placeholder="Enter Email" required="true" class="form-control")
+        button#btnBegin(type="submit" class="btn btn-primary btn-lg  btn-block") Assert/Login
+        span#success
+        span#error
